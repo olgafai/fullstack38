@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Ajax</title>
+</head>
+
+<body>
+
+    <button type="button" class="btn btn-primary mt-3" onclick="onPrint(0)">PRINT POSTS</button>
+    <button type="button" class="btn btn-primary mt-3" onclick="onPrint(1)">PRINT COMMENTS</button>
+    <button type="button" class="btn btn-primary mt-3" onclick="onPrint(2)">PRINT ALBUMS</button>
+    <button type="button" class="btn btn-primary mt-3" onclick="onPrint(3)">PRINT PHOTOS</button>
+    <button type="button" class="btn btn-primary mt-3" onclick="onPrint(4)">PRINT TODOS</button>
+    <button type="button" class="btn btn-primary mt-3" onclick="onPrint(5)">PRINT USERS</button>
+   
+    <div id="usersDV"></div>
+    <script>
+        var urls = ['posts', 'comments',
+            'albums', 'photos',
+            'todos', 'users']
+        var baseUrl = 'https://jsonplaceholder.typicode.com/';
+        var url = "";
+        var users = [];
+
+        function onPrint(num) {
+            var url = baseUrl + urls[num];
+            getDataFromServer(url)
+}
+
+function getDataFromServer(url) {
+        $.ajax({
+            type: 'GET',
+            datatype: 'json',
+            url: url,
+            success: function (data) {
+                users = data
+                onPrint()
+            },
+            error: function (error) {
+                console.log('error : ', error)
+            },
+        })
+    }
+ 
+        function onPrint(num) {
+            var url = baseUrl + urls[num];
+            getDataFromServer(url)
+}
+
+    </script>
+</body>
+
+</html>
